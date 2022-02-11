@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
 import Axios from 'axios';
+import GoogleLogin from 'react-google-login'
 
 function Login({ setToken }) {
     const [usernameReg, setUsernameReg] = useState("");
@@ -36,55 +37,48 @@ function Login({ setToken }) {
     };
     useEffect(() => {
         const script = document.createElement('script');
-      
+
         script.src = "https://accounts.google.com/gsi/client";
         script.async = true;
         script.defer = true;
-      
-        document.body.appendChild(script);
-      
-        return () => {
-          document.body.removeChild(script);
-        }
-      }, []);
 
-    const handleCredentialResponse = (response) =>{
-        setToken(response.credential)
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        }
+    }, []);
+
+    const handleCredentialResponse = (results) => {
+        setToken(results.tokenId)
     }
 
-    return (
-        <div className="App">
-            <div className="registration">
-                <h1>Registration</h1>
-                <label>Username</label>
-                <input type="text" onChange={(x) => { setUsernameReg(x.target.value); }} /><br />
-                <label>Password</label>
-                <input type="password" onChange={(x) => { setPasswordReg(x.target.value); }} /> <br />
-                <button onClick={register}> Register</button>
-            </div>
-            <div className="login">
-                <h1>Login</h1>
-                <input type="text" placeholder="Username…" onChange={(x) => { setUsername(x.target.value); }} /> <br />
-                <input type="password" placeholder="Password…" onChange={(x) => { setPassword(x.target.value); }} />
-                <button onClick={login}>Login</button>
-            </div>
-            <p>{loginStatus}</p>
-            <div id="g_id_onload"
-                data-client_id="975785739574-gj70fl0q2htqrhq5ae1a2csp5k12ne9v.apps.googleusercontent.com"
-                data-callback="handleCredentialResponse"
-                data-auto_prompt="false">
-            </div>
-            <div className="g_id_signin"
-                data-type="standard"
-                data-size="large"
-                data-theme="outline"
-                data-text="sign_in_with"
-                data-shape="rectangular"
-                data-logo_alignment="left">
-            </div>
+        return (
+            <div className="App">
+                <div className="registration">
+                    <h1>Registration</h1>
+                    <label>Username</label>
+                    <input type="text" onChange={(x) => { setUsernameReg(x.target.value); }} /><br />
+                    <label>Password</label>
+                    <input type="password" onChange={(x) => { setPasswordReg(x.target.value); }} /> <br />
+                    <button onClick={register}> Register</button>
+                </div>
+                <div className="login">
+                    <h1>Login</h1>
+                    <input type="text" placeholder="Username…" onChange={(x) => { setUsername(x.target.value); }} /> <br />
+                    <input type="password" placeholder="Password…" onChange={(x) => { setPassword(x.target.value); }} />
+                    <button onClick={login}>Login</button>
+                </div>
+                <p>{loginStatus}</p>
+                <GoogleLogin
+                    clientId="975785739574-gj70fl0q2htqrhq5ae1a2csp5k12ne9v.apps.googleusercontent.com"
+                    buttonText="Log in with Google"
+                    onSuccess={handleCredentialResponse}
+                    onFailure={handleCredentialResponse}
+                />
 
-        </div>
-    );
-}
+            </div>
+        );
+    }
 
-export default Login;
+    export default Login;
