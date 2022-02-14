@@ -9,7 +9,7 @@ const saltRound = 10;
 const db = mysql.createConnection({
     user: "root",
     host: "localhost",
-    password: "9e1bc3cb-a91a-455d-a101-6d882570e702",
+    password: "12345",
     database: "loginsystem",
 
 });

@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import './App.css';
 import Login from "./Login";
+import { Tabs } from 'react-simple-tabs-component';
+import 'react-simple-tabs-component/dist/index.css';
+import Register from "./Register";
 
-function App() {
+// Component Example
+const TabOne = () => {
+   return <Register />
+ }
+
+ const TabTwo = () => {
    const [token, setToken] = useState();
    if(!token) {
       return <Login setToken={setToken} />
@@ -14,6 +22,23 @@ function App() {
         </div>
      </div>
    );
-}
+ }
  
-export default App;
+ const tabs = [
+   {
+     label: 'Sign Up',
+     Component: TabOne 
+   },
+   {
+     label: 'Log In',
+     Component: TabTwo
+   },
+ ]
+
+export default function App() {
+   return (
+      <div className="App">
+         <Tabs tabs={tabs}/>
+      </div>
+   );
+}
