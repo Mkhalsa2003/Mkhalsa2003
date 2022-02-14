@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
 import Axios from 'axios';
-import GoogleLogin from 'react-google-login'
+import GoogleLogin from 'react-google-login';
 
 function Login({ setToken }) {
-    const [usernameReg, setUsernameReg] = useState("");
-    const [passwordReg, setPasswordReg] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loginStatus, setLoginStatus] = useState("");
 
-    const register = () => {
-        Axios.post("http://localhost:8080/register", {
-            username: usernameReg,
-            password: passwordReg,
-        }).then((response) => {
-            console.log(response);
-        });
-    };
     const login = () => {
         Axios.post("http://localhost:8080/login", {
             username: username,
@@ -53,32 +43,23 @@ function Login({ setToken }) {
         setToken(results.tokenId)
     }
 
-        return (
-            <div className="App">
-                <div className="registration">
-                    <h1>Registration</h1>
-                    <label>Username</label>
-                    <input type="text" onChange={(x) => { setUsernameReg(x.target.value); }} /><br />
-                    <label>Password</label>
-                    <input type="password" onChange={(x) => { setPasswordReg(x.target.value); }} /> <br />
-                    <button onClick={register}> Register</button>
-                </div>
-                <div className="login">
-                    <h1>Login</h1>
-                    <input type="text" placeholder="Username…" onChange={(x) => { setUsername(x.target.value); }} /> <br />
-                    <input type="password" placeholder="Password…" onChange={(x) => { setPassword(x.target.value); }} />
-                    <button onClick={login}>Login</button>
-                </div>
-                <p>{loginStatus}</p>
+    return (
+        <div className="App">
+            <div className="login">
+                <h1>Login</h1>
+                <input type="text" placeholder="Username" onChange={(x) => { setUsername(x.target.value); }} /> <br />
+                <input type="password" placeholder="Password" onChange={(x) => { setPassword(x.target.value); }} />
+                <button onClick={login}>Login</button>
                 <GoogleLogin
-                    clientId="975785739574-gj70fl0q2htqrhq5ae1a2csp5k12ne9v.apps.googleusercontent.com"
-                    buttonText="Log in with Google"
-                    onSuccess={handleCredentialResponse}
-                    onFailure={handleCredentialResponse}
+                clientId="975785739574-gj70fl0q2htqrhq5ae1a2csp5k12ne9v.apps.googleusercontent.com"
+                buttonText="Log in with Google"
+                onSuccess={handleCredentialResponse}
+                onFailure={handleCredentialResponse}
                 />
-
+                <p>{loginStatus}</p>
             </div>
-        );
-    }
+        </div>
+    );
+}
 
-    export default Login;
+export default Login;
