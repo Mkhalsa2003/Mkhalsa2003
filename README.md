@@ -68,3 +68,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+GETTING UP AND RUNNING:
+1. Make sure to have MySQL and MySQL Workbench installed. 
+2. Take note of MySQL username and password
+3. Inside MySQL create a schema called 'loginsystem' and a table called 'users'
+4. Open up index.js in server folder.
+5. Change the MySQL username and password to match your details.
+6. Inside VSCode open terminal, navigate into the 'server' folder and run 'node index.js' to start the server.
+7. Open up a second terminal window, navigate to the 'client' folder and run 'npm start' to start the react app.
