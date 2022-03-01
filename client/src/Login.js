@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './App.css';
 import Axios from 'axios';
 import GoogleLogin from 'react-google-login';
+import { useCookies } from 'react-cookie';
 
 function Login({ setToken }) {
     const [username, setUsername] = useState("");
@@ -9,7 +10,7 @@ function Login({ setToken }) {
     const [loginStatus, setLoginStatus] = useState("");
 
     const login = () => {
-        Axios.post("http://localhost:8080/login", {
+        Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/login", {
             username: username,
             password: password,
         }).then((response) => {
@@ -43,13 +44,21 @@ function Login({ setToken }) {
         setToken(results.tokenId)
     }
 
+    const[cookies, setCookie] = useCookies(["user"]);
+
+    function handleLoginCookie() {
+       setCookie("login", "login-attempt", {
+          path: "/"
+       });
+    }
+
     return (
         <div className="App">
             <div className="login">
                 <h1>Login</h1>
                 <input type="text" placeholder="Username" onChange={(x) => { setUsername(x.target.value); }} /> <br />
                 <input type="password" placeholder="Password" onChange={(x) => { setPassword(x.target.value); }} />
-                <button onClick={login}>Login</button>
+                <button onClick={login, handleLoginCookie}>Login</button>
                 <GoogleLogin
                 clientId="975785739574-gj70fl0q2htqrhq5ae1a2csp5k12ne9v.apps.googleusercontent.com"
                 buttonText="Log in with Google"
