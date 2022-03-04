@@ -9,6 +9,7 @@ function Register() {
 
     const register = () => {
         Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/register", {
+        //Axios.post("http://localhost:8080/register", {
             username: usernameReg,
             password: passwordReg,
         }).then((response) => {
@@ -16,12 +17,21 @@ function Register() {
         });
     };
 
-    const[cookies, setCookie] = useCookies(["user"]);
+    const[cookies, setCookie] = useCookies(["register"]);
 
     function handleCookie() {
-       setCookie("register", "register-attempt", {
-          path: "/"
-       });
+    if (cookies.register == undefined) {
+        setCookie("register", "1", {
+            path: "/"
+     });
+    }
+    else {
+        var registercookie = parseInt(cookies.register);
+        registercookie++;
+        setCookie("register", registercookie, {
+            path: "/"
+        });
+    }
     }
 
     return (
@@ -30,7 +40,7 @@ function Register() {
                 <h1>Sign Up</h1>
                 <input type="text" placeholder="Username" onChange={(x) => { setUsernameReg(x.target.value); }} /><br />
                 <input type="password" placeholder="Password" onChange={(x) => { setPasswordReg(x.target.value); }} /> <br />
-                <button onClick={register, handleCookie}>Sign Up</button>
+                <button onClick={() => {register(); handleCookie();}}>Sign Up</button>
             </div>
         </div>
     );

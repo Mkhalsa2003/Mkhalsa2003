@@ -11,6 +11,8 @@ function Login({ setToken }) {
 
     const login = () => {
         Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/login", {
+        //Axios.post("http://localhost:8080/login", {
+
             username: username,
             password: password,
         }).then((response) => {
@@ -44,12 +46,21 @@ function Login({ setToken }) {
         setToken(results.tokenId)
     }
 
-    const[cookies, setCookie] = useCookies(["user"]);
+    const[cookies, setCookie] = useCookies(["login"]);
 
     function handleLoginCookie() {
-       setCookie("login", "login-attempt", {
-          path: "/"
-       });
+        if (cookies.login == undefined) {
+            setCookie("login", "1", {
+                path: "/"
+         });
+        }
+        else {
+            var logincookie = parseInt(cookies.login);
+            logincookie++;
+            setCookie("login", logincookie, {
+                path: "/"
+            });
+        }
     }
 
     return (
@@ -58,7 +69,7 @@ function Login({ setToken }) {
                 <h1>Login</h1>
                 <input type="text" placeholder="Username" onChange={(x) => { setUsername(x.target.value); }} /> <br />
                 <input type="password" placeholder="Password" onChange={(x) => { setPassword(x.target.value); }} />
-                <button onClick={login, handleLoginCookie}>Login</button>
+                <button onClick={() => {login(); handleLoginCookie();}}>Login</button>
                 <GoogleLogin
                 clientId="975785739574-gj70fl0q2htqrhq5ae1a2csp5k12ne9v.apps.googleusercontent.com"
                 buttonText="Log in with Google"

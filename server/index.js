@@ -6,31 +6,41 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRound = 10;
+const cookieParser = require('cookie-parser');
 
 var config = {
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASS
+  //user: process.env.DB_USER,
+  //database: process.env.DB_NAME,
+  //password: process.env.DB_PASS
+  user: "root",
+  database: "loginsystem",
+  password: "9e1bc3cb-a91a-455d-a101-6d882570e702",
+  host:"localhost"
 }
 
-config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
+//config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
 
 const db = mysql.createConnection(config);
 
 db.connect();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(
   cors({
-      origin: ["https://elite-firefly-337919.uc.r.appspot.com"],
-      methods: ["GET", "POST", "OPTIONS"],
-      credentials: true,
+      //origin: ["https://elite-firefly-337919.uc.r.appspot.com"],
+        origin: ["http://localhost:3000"],
+        methods: ["GET", "POST", "OPTIONS"],
+        credentials: true,
   })
 );
 
-const port = process.env.PORT;
-app.listen(port, () => console.log("API is running on" + port.toString()));
+//const port = process.env.PORT;
+//app.listen(port, () => console.log("API is running on" + port.toString()));
+
+app.listen(8080, () => console.log("API is running on " + 8080));
+
 
 app.options('/', cors());
 
@@ -83,3 +93,19 @@ app.post("/login", (req, res) => {
     }
   );
 });
+
+app.post("/storecookie", (req, res) => {
+    const testcookie = req.body.testcookie;
+    const logincookie = req.body.logincookie;
+    const registercookie = req.body.registercookie;
+    const date = req.body.date;
+  
+    db.execute(
+        "INSERT INTO cookies (testcookie, logincookie, registercookie, date) VALUES (?,?,?,?)",
+      [testcookie, logincookie, registercookie, date],
+      (err, result) => {
+        console.log(err);
+      }
+    );
+  });
+  
