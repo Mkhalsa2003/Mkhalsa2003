@@ -9,13 +9,13 @@ const saltRound = 10;
 const cookieParser = require('cookie-parser');
 
 var config = {
-  //user: process.env.DB_USER,
-  //database: process.env.DB_NAME,
-  //password: process.env.DB_PASS
-  user: "root",
-  database: "loginsystem",
-  password: "9e1bc3cb-a91a-455d-a101-6d882570e702",
-  host:"localhost"
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
+  //user: "root",
+  //database: "loginsystem",
+  //password: "",
+  //host:"localhost"
 }
 
 //config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
@@ -29,8 +29,8 @@ app.use(cookieParser());
 
 app.use(
   cors({
-      //origin: ["https://elite-firefly-337919.uc.r.appspot.com"],
-        origin: ["http://localhost:3000"],
+      origin: ["https://elite-firefly-337919.uc.r.appspot.com"],
+        //origin: ["http://localhost:3000"],
         methods: ["GET", "POST", "OPTIONS"],
         credentials: true,
   })
@@ -40,6 +40,9 @@ app.use(
 //app.listen(port, () => console.log("API is running on" + port.toString()));
 
 app.listen(8080, () => console.log("API is running on " + 8080));
+
+
+//app.listen(8080, () => console.log("API is running on " + 8080));
 
 
 app.options('/', cors());
