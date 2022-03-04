@@ -18,7 +18,7 @@ var config = {
   //host:"localhost"
 }
 
-//config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
+config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
 
 const db = mysql.createConnection(config);
 
@@ -36,11 +36,8 @@ app.use(
   })
 );
 
-//const port = process.env.PORT;
-//app.listen(port, () => console.log("API is running on" + port.toString()));
-
-app.listen(8080, () => console.log("API is running on " + 8080));
-
+const port = process.env.PORT;
+app.listen(port, () => console.log("API is running on" + port.toString()));
 
 //app.listen(8080, () => console.log("API is running on " + 8080));
 
