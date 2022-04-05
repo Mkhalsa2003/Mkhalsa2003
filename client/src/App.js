@@ -6,6 +6,11 @@ import 'react-simple-tabs-component/dist/index.css';
 import Register from "./Register";
 import { useCookies } from 'react-cookie';
 import Axios from "axios";
+import GetWeather from "./GetWeather";
+
+const TabThree = () => {
+   return <GetWeather />
+}
 
 const TabTwo = () => {
    return <Register />
@@ -34,6 +39,10 @@ const TabOne = () => {
      label: 'Sign Up',
      Component: TabTwo
    },
+   {
+      label: 'Weather',
+      Component: TabThree
+   }
 ]
 
 export default function App() {
