@@ -8,6 +8,8 @@ import { useCookies } from 'react-cookie';
 import Axios from "axios";
 import GetWeather from "./GetWeather";
 
+
+
 const TabThree = () => {
    return <GetWeather />
 }
@@ -17,9 +19,11 @@ const TabTwo = () => {
 }
 
 const TabOne = () => {
-   const [token, setToken] = useState();
+const [token, setToken] = useState();
+const [username, setUsername] = useState();
+
    if(!token) {
-      return <Login setToken={setToken} />
+      return <Login setToken={setToken} setUsername={setUsername} />
    }
    return (
       <div className="App">

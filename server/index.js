@@ -82,7 +82,7 @@ app.post("/login", (req, res) => {
               username,
               process.env.ACCESS_TOKEN_SECRET
             );
-            res.send({ token: accessToken });
+            res.send({ token: accessToken, username: result[0].username });
           } else {
             res.send({ message: "Username/Password is incorrect" });
           }
@@ -108,4 +108,32 @@ app.post("/storecookie", (req, res) => {
       }
     );
   });
-  
+
+app.post("/setpreference", (req, res) => {
+  const forcastType = req.body.forcastType;
+  const username = req.body.username;
+
+  db.execute(
+    "UPDATE loginsystem.users SET forcastPreference = ? WHERE username = ?",
+    [forcastType, username],
+    (err, result) => {
+      console.log(err);
+    }
+  );
+});
+
+app.post("/getpreference", (req, res) => {
+  const username = req.body.username;
+
+  db.execute(
+    "SELECT * FROM users WHERE username = ?",
+    [username],
+    (err, result) => {
+      if (err) {
+        res.send({ err: err });
+      }
+
+      res.send({forcastType: result[0].forcastType});
+    }
+  );
+});
