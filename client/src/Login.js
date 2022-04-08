@@ -4,14 +4,22 @@ import Axios from 'axios';
 import GoogleLogin from 'react-google-login';
 import { useCookies } from 'react-cookie';
 
+
+
 function Login({ setToken }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loginStatus, setLoginStatus] = useState("");
+    const[cookies, setCookie] = useCookies(["login", "username"]);
+
+    
+    function setUsernameCookie() {
+        setCookie("username", username);
+    }
 
     const login = () => {
-        Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/login", {
-        //Axios.post("http://localhost:8080/login", {
+        //Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/login", {
+        Axios.post("http://localhost:8080/login", {
 
             username: username,
             password: password,
@@ -22,6 +30,7 @@ function Login({ setToken }) {
             else if (response.data.token !== undefined) {
                 setLoginStatus("Logged in Successfully");
                 setToken(response.data.token)
+                setUsernameCookie();
             }
             else {
                 setLoginStatus("Something Went Wrong")
@@ -46,7 +55,7 @@ function Login({ setToken }) {
         setToken(results.tokenId)
     }
 
-    const[cookies, setCookie] = useCookies(["login"]);
+
 
     function handleLoginCookie() {
         if (cookies.login == undefined) {

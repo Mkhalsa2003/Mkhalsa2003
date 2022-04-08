@@ -9,16 +9,16 @@ const saltRound = 10;
 const cookieParser = require('cookie-parser');
 
 var config = {
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASS,
-  //user: "root",
-  //database: "loginsystem",
-  //password: "",
-  //host:"localhost"
+  //user: process.env.DB_USER,
+  //database: process.env.DB_NAME,
+  //password: process.env.DB_PASS,
+  user: "root",
+  database: "loginsystem",
+  password: "",
+  host:"localhost"
 }
 
-config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
+//config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
 
 const db = mysql.createConnection(config);
 
@@ -29,14 +29,15 @@ app.use(cookieParser());
 
 app.use(
   cors({
-      origin: ["https://elite-firefly-337919.uc.r.appspot.com"],
-        //origin: ["http://localhost:3000"],
+      //origin: ["https://elite-firefly-337919.uc.r.appspot.com"],
+        origin: ["http://localhost:3000"],
         methods: ["GET", "POST", "OPTIONS"],
         credentials: true,
   })
 );
 
-const port = process.env.PORT;
+//const port = process.env.PORT;
+const port = 8080;
 app.listen(port, () => console.log("API is running on" + port.toString()));
 
 //app.listen(8080, () => console.log("API is running on " + 8080));
@@ -114,7 +115,7 @@ app.post("/setpreference", (req, res) => {
   const username = req.body.username;
 
   db.execute(
-    "UPDATE loginsystem.users SET forcastPreference = ? WHERE username = ?",
+    "UPDATE users SET forcastType = ? WHERE username = ?",
     [forcastType, username],
     (err, result) => {
       console.log(err);

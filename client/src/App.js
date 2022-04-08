@@ -10,10 +10,6 @@ import GetWeather from "./GetWeather";
 
 
 
-const TabThree = () => {
-   return <GetWeather />
-}
-
 const TabTwo = () => {
    return <Register />
 }
@@ -26,11 +22,7 @@ const [username, setUsername] = useState();
       return <Login setToken={setToken} setUsername={setUsername} />
    }
    return (
-      <div className="App">
-         <div className="registration">
-            <h1>Logged in Successfully</h1>
-         </div>
-      </div>
+      <GetWeather />
    );
 }
  
@@ -42,10 +34,6 @@ const [username, setUsername] = useState();
    {
      label: 'Sign Up',
      Component: TabTwo
-   },
-   {
-      label: 'Weather',
-      Component: TabThree
    }
 ]
 
@@ -77,8 +65,8 @@ export default function App() {
 
    function sendCookiesOnExit()
    {
-      Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/storecookie", {
-      //Axios.post("http://localhost:8080/storecookie", {
+      //Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/storecookie", {
+      Axios.post("http://localhost:8080/storecookie", {
       testcookie: cookies.test ? cookies.test : '0',
       logincookie: cookies.login ? cookies.login : '0',
       registercookie: cookies.register ? cookies.register : '0',
