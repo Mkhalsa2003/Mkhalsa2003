@@ -14,7 +14,7 @@ var config = {
   //password: process.env.DB_PASS,
   user: "root",
   database: "loginsystem",
-  password: "",
+  password: "9e1bc3cb-a91a-455d-a101-6d882570e702",
   host:"localhost"
 }
 
@@ -48,6 +48,7 @@ app.options('/', cors());
 app.post("/register", cors(), (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
+  const forcastType = "F";
 
   bcrypt.hash(password, saltRound, (err, hash) => {
     if (err) {
@@ -55,8 +56,8 @@ app.post("/register", cors(), (req, res) => {
     }
 
     db.execute(
-      "INSERT INTO users (username, password) VALUES (?,?)",
-      [username, hash],
+      "INSERT INTO users (username, password, forcastType) VALUES (?,?,?)",
+      [username, hash, forcastType],
       (err, result) => {
         console.log(err);
       }
