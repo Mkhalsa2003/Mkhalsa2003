@@ -37,3 +37,17 @@ input {
   border: solid #ccc;
   border-width: 1px 1px 0 1px;
 }
+
+.tableheader, .tablebody {
+  height: 30px;
+  width: 200px;
+}
+
+.tableimg {
+  height: 86px;
+  width: 86px;;
+}
+
+.spacer {
+  height: 30px;
+}
