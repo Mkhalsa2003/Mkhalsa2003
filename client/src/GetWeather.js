@@ -78,7 +78,7 @@ function GetWeather() {
                     body2 += "</tr>";
                     img2 += "</tr>";
 
-                    var html = "<table>" + header + body + img + "<tr class='spacer'></tr>" + header2 + body2 + img2 + "</table>";
+                    var html = "<table>" + header + body + img + "<tr class='spacer'></tr>" + header2 + body2 + img2 + "<tr class='spacer'></tr>" + "</table>";
                     setTable(html);
                 });
             });
