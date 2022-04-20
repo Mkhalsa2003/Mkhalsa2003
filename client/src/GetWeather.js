@@ -145,9 +145,9 @@ function GetWeather() {
                     <Col />
                     <Col>
                         <Stack direction="horizontal" className="col-md-5 mx-auto">
-                            <Button onClick={() => setUserPreference("F")}>F</Button>
-                            <Button onClick={() => setUserPreference("C")}>C</Button>
-                            <Button onClick={() => setUserPreference("K")}>K</Button>
+                            <Button onClick={() => setUserPreference("F")}>Fahrenheit</Button>
+                            <Button onClick={() => setUserPreference("C")}>Celsius</Button>
+                            <Button onClick={() => setUserPreference("K")}>Kelvin</Button>
                         </Stack>
                     </Col>
                     <Col />
