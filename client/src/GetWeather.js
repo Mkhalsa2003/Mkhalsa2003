@@ -15,6 +15,7 @@ function GetWeather() {
         {
             command: '(Change to )Fahrenheit',
             callback: () => setUserPreference("F")
+            
         },
         {
             command: '(Change to )Celsius',
@@ -35,7 +36,7 @@ function GetWeather() {
 
     if (!browserSupportsSpeechRecognition) {
         return <span>Browser doesn't support speech recognition.</span>;
-    }
+    };
 
 
     const callGetWeather = () => {
@@ -106,7 +107,8 @@ function GetWeather() {
     };
 
     const getUserPreference = () => {
-        //Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/getpreference", {
+        //Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/getpreference",
+         {
         Axios.post("http://localhost:8080/getpreference", {
 
             username: cookie.get("username")
@@ -116,12 +118,14 @@ function GetWeather() {
                 setForcastType(response.data.forcastType);
             }
         })
-    }
+    }}
 
     const setUserPreference = (preference) => {
         setForcastType(preference);
-        //Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/setpreference", {
-        Axios.post("http://localhost:8080/setpreference", {
+        //Axios.post("https://api-dot-elite-firefly-337919.uc.r.appspot.com/setpreference", 
+        {
+        Axios.post("http://localhost:8080/setpreference", 
+        {
 
             username: cookie.get("username"),
             forcastType: preference
@@ -129,8 +133,7 @@ function GetWeather() {
         });
     }
 
-    callGetWeather();
-    getUserPreference();
+    callGetWeather();}
     return (
         <div>
             <p>Say something like "Change to Fahrenheit"</p>
@@ -156,8 +159,8 @@ function GetWeather() {
             <div dangerouslySetInnerHTML={{ __html: htmlTable }} />
 
         </div>
-    );
-
-}
+    );}
+    
+    
 
 export default GetWeather;

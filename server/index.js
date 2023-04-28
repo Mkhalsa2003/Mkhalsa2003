@@ -14,7 +14,7 @@ var config = {
   //password: process.env.DB_PASS,
   user: "root",
   database: "loginsystem",
-  password: "9e1bc3cb-a91a-455d-a101-6d882570e702",
+  password: "fxxcv",
   host:"localhost"
 }
 
