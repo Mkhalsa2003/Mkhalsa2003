@@ -2,6 +2,7 @@ import React, { useState, ReactDOM } from "react";
 import './App.css';
 import Axios from 'axios';
 import { Cookies } from 'react-cookie';
+import 'regenerator-runtime/runtime';
 import { Container, Row, Col, Button, Stack } from 'react-bootstrap';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
@@ -61,31 +62,31 @@ function GetWeather() {
                         if (period.isDaytime) {
                             header += ("<th class='tableheader'>" + period.name + "</th>");
                             var tempstring = period.temperature
-                            if (forcastType == "C") {
-                                var temp = parseInt(tempstring);
-                                var tempCalc = Math.round(((temp - 32) * .5556));
-                                var tempstring = tempCalc.toString();
+                            if (forcastType === "C") {
+                                temp = parseInt(tempstring);
+                                tempCalc = Math.round(((temp - 32) * .5556));
+                                tempstring = tempCalc.toString();
                             }
-                            else if (forcastType == "K") {
-                                var temp = parseInt(tempstring);
-                                var tempCalc = Math.round(((temp - 32) * .5556) + 273.15);
-                                var tempstring = tempCalc.toString();
+                            else if (forcastType === "K") {
+                                temp = parseInt(tempstring);
+                                tempCalc = Math.round(((temp - 32) * .5556) + 273.15);
+                                tempstring = tempCalc.toString();
                             }
                             body += ("<td class='tablebody'>" + tempstring + " " + forcastType + "</td>");
                             img += ("<td class='tableimg'><img src=\"" + period.icon + "\"/></td>");
                         }
                         else {
                             header2 += ("<th>" + period.name + "</th>");
-                            var tempstring = period.temperature
-                            if (forcastType == "C") {
-                                var temp = parseInt(tempstring);
-                                var tempCalc = Math.round(((temp - 32) * .5556));
-                                var tempstring = tempCalc.toString();
+                            tempstring = period.temperature
+                            if (forcastType === "C") {
+                                temp = parseInt(tempstring);
+                                tempCalc = Math.round(((temp - 32) * .5556));
+                                tempstring = tempCalc.toString();
                             }
-                            else if (forcastType == "K") {
+                            else if (forcastType === "K") {
                                 var temp = parseInt(tempstring);
                                 var tempCalc = Math.round(((temp - 32) * .5556) + 273.15);
-                                var tempstring = tempCalc.toString();
+                                tempstring = tempCalc.toString();
                             }
                             body2 += ("<td>" + tempstring + " " + forcastType + "</td>");
                             img2 += ("<td><img src=\"" + period.icon + "\"/></td>");
@@ -160,7 +161,4 @@ function GetWeather() {
 
         </div>
     );}
-    
-    
-
 export default GetWeather;
